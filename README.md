@@ -30,7 +30,7 @@ O produto final da aplicação Python deverá ser um extrato bancário mostrando
 ## Checklist
 
 - [x]  Readme.md para documentar
-- [ ]  Módulo e classe sistema
+- [x]  Módulo e classe sistema
 - [ ]  Módulo e classe banco
 - [ ]  Módulo e classe agência
 - [ ]  Módulo e classe pessoa

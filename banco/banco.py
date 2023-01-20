@@ -4,6 +4,8 @@ class Banco:
     """
 
     def menu_banco(self):
+        from listas.listas import bancos
+
         print("""
             GERENCIAR BANCOS
                 Escolha a opção desejada:
@@ -20,9 +22,9 @@ class Banco:
                 print("Escolha inválida. Tente novamente!")
             else:
                 if escolha == 1:
-                    pass
+                    bancos.append(input("Deseja adicionar qual banco? "))
                 elif escolha == 2:
-                    pass
+                    print(f"Lista de bancos: {bancos}")
                 elif escolha == 3:
                     pass
                 elif escolha == 4:

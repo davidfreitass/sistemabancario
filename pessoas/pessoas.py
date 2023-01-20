@@ -4,6 +4,8 @@ class Pessoa:
     """
 
     def menu_pessoa(self):
+        from listas.listas import pessoas
+
         print("""
             GERENCIAR PESSOAS
                 Escolha a opção desejada:
@@ -20,9 +22,9 @@ class Pessoa:
                 print("Escolha inválida. Tente novamente!")
             else:
                 if escolha == 1:
-                    pass
+                    pessoas.append(input("Deseja adicionar que pessoa? "))
                 elif escolha == 2:
-                    pass
+                    print(f"Lista de pessoas: {pessoas}")
                 elif escolha == 3:
                     pass
                 elif escolha == 4:

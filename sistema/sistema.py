@@ -1,7 +1,3 @@
-from banco.banco import Banco
-from pessoas.pessoas import Pessoa
-
-
 class Sistema:
     """
     Menu de administração do Sistema
@@ -38,10 +34,12 @@ class Sistema:
                     print("Escolha inválida. Tente novamente!")
 
     def gerenciar_bancos(self):
+        from banco.banco import Banco
         b = Banco()
         return b.menu_banco()
 
     def gerenciar_pessoas(self):
+        from pessoas.pessoas import Pessoa
         p = Pessoa()
         return p.menu_pessoa()
 

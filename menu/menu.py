@@ -1,6 +1,3 @@
-from sistema.sistema import Sistema
-
-
 class Menu:
     """
     Menu inicial do Sistema Bancário
@@ -27,11 +24,14 @@ class Menu:
                 print("Escolha inválida. Tente novamente!")
 
     def administrar_sistema(self):
+        from sistema.sistema import Sistema
         s = Sistema()
         return s.menu_principal()
 
     def acessar_como_cliente(self):
-        pass
+        from cliente.cliente import Cliente
+        c = Cliente()
+        return c.menu_cliente()
 
     def sair(self):
         print("Saindo do programa...")

@@ -22,15 +22,42 @@ class Pessoa:
                 print("Escolha inválida. Tente novamente!")
             else:
                 if escolha == 1:
-                    pessoas.append(input("Deseja adicionar que pessoa? "))
+                    pessoas.append(
+                        input("Deseja adicionar que pessoa? ").upper())
                 elif escolha == 2:
                     print(f"Lista de pessoas: {pessoas}")
                 elif escolha == 3:
-                    pass
+                    pes_pessoa = input(
+                        "Qual pessoa deseja pesquisar? ").upper()
+                    if (pes_pessoa in pessoas) == True:
+                        print(
+                            f"A pessoa {pes_pessoa.upper()} se encontra na lista de pessoas do sistema.")
+                    else:
+                        print(
+                            f"A pessoa {pes_pessoa.upper()} NÃO se encontra na lista de pessoas do sistema.")
                 elif escolha == 4:
-                    pass
+                    print("-" * 30)
+                    for i, p in enumerate(pessoas):
+                        print(f"[{i}]: {p}")
+                    print("-" * 30)
+                    excluir_pessoa = int(
+                        input("Deseja excluir qual pessoa? "))
+                    print(
+                        f"A pessoa {pessoas[excluir_pessoa]} foi removida com sucesso!")
+                    del pessoas[excluir_pessoa]
+                    print(f"Nova lista de pessoas: {pessoas}")
                 elif escolha == 5:
-                    pass
+                    print("-" * 30)
+                    for i, b in enumerate(pessoas):
+                        print(f"[{i}]: {b}")
+                    print("-" * 30)
+                    atualizar_pessoa = int(
+                        input("Deseja atualizar qual pessoa? "))
+                    pessoas[atualizar_pessoa] = input(
+                        f"Atualizar pessoa {pessoas[atualizar_pessoa]} para: ").upper()
+                    print(
+                        f"A pessoa {pessoas[atualizar_pessoa]} foi atualizada com sucesso!")
+                    print(f"Nova lista de pessoas: {pessoas}")
                 elif escolha == 6:
                     from sistema.sistema import Sistema
                     voltar = Sistema()

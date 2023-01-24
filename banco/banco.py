@@ -22,15 +22,41 @@ class Banco:
                 print("Escolha inválida. Tente novamente!")
             else:
                 if escolha == 1:
-                    bancos.append(input("Deseja adicionar qual banco? "))
+                    bancos.append(
+                        input("Deseja adicionar qual banco? ").upper())
                 elif escolha == 2:
                     print(f"Lista de bancos: {bancos}")
                 elif escolha == 3:
-                    pass
+                    pes_banco = input("Qual banco deseja pesquisar? ").upper()
+                    if (pes_banco in bancos) == True:
+                        print(
+                            f"O banco {pes_banco.upper()} se encontra na lista de bancos do sistema.")
+                    else:
+                        print(
+                            f"O banco {pes_banco.upper()} NÃO se encontra na lista de bancos do sistema.")
                 elif escolha == 4:
-                    pass
+                    print("-" * 30)
+                    for i, b in enumerate(bancos):
+                        print(f"[{i}]: {b}")
+                    print("-" * 30)
+                    excluir_banco = int(
+                        input("Deseja excluir qual banco? "))
+                    print(
+                        f"Banco {bancos[excluir_banco]} foi removido com sucesso!")
+                    del bancos[excluir_banco]
+                    print(f"Nova lista de bancos: {bancos}")
                 elif escolha == 5:
-                    pass
+                    print("-" * 30)
+                    for i, b in enumerate(bancos):
+                        print(f"[{i}]: {b}")
+                    print("-" * 30)
+                    atualizar_banco = int(
+                        input("Deseja atualizar qual banco? "))
+                    bancos[atualizar_banco] = input(
+                        f"Atualizar banco {bancos[atualizar_banco]} para: ").upper()
+                    print(
+                        f"Banco {bancos[atualizar_banco]} foi atualizado com sucesso!")
+                    print(f"Nova lista de bancos: {bancos}")
                 elif escolha == 6:
                     from sistema.sistema import Sistema
                     voltar = Sistema()

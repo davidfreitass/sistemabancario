@@ -8,7 +8,12 @@ class Cliente:
 
         for i, p in enumerate(pessoas):
             print(f"[{i}]: {p.upper()}")
-        opcao = int(input("Deseja selecionar qual cliente? "))
+        opcao = int(
+            input(f"Deseja selecionar qual cliente? [999 para voltar] "))
+        if opcao == 999:
+            from menu.menu import Menu
+            voltar = Menu()
+            return voltar.menu()
         print(f"""
                     ACESSO DO CLIENTE
                             Cliente selecionado: {pessoas[opcao].upper()}
@@ -37,6 +42,7 @@ class Cliente:
                 elif escolha == 5:
                     pass
                 elif escolha == 6:
-                    pass
+                    voltar = Cliente()
+                    return voltar.menu_cliente()
                 else:
                     print("Escolha inválida. Tente novamente!")

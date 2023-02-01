@@ -58,8 +58,6 @@ class Banco:
                         f"Banco {bancos[atualizar_banco]} foi atualizado com sucesso!")
                     print(f"Nova lista de bancos: {bancos}")
                 elif escolha == 6:
-                    from sistema.sistema import Sistema
-                    voltar = Sistema()
-                    return voltar.menu_principal()
+                    pass
                 else:
                     print("Escolha inválida. Tente novamente!")

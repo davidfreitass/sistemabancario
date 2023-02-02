@@ -3,10 +3,10 @@ from pessoas.pessoas import Pessoa
 
 class Cliente():
     """
-    Menu de acesso dos clientes.
+    Classe para gerir as informações dos clientes.
     """
 
-    transacoes: list = {}
+    transacoes: list = []
     saldo:  float = 0.0
     pessoa: Pessoa
 
@@ -22,4 +22,4 @@ class Cliente():
         self.saldo -= valor
 
     def saldo(self) -> float:
-        return self.saldo
+        return (f"SALDO ATUAL: {self.saldo}")

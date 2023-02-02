@@ -1,4 +1,5 @@
 from pessoas.pessoas import Pessoa
+from cliente.cliente import Cliente
 
 
 class Menu:
@@ -8,6 +9,7 @@ class Menu:
     lista_clientes: list = []
     lista_bancos: list = []
     lista_pessoas: list = []
+    nomes_clientes: list = []
 
     def menu(self):
         print("""
@@ -53,24 +55,21 @@ class Menu:
                 elif escolha == 4:
                     pass
                 elif escolha == 5:
-                    pass
+                    self.menu()
                 else:
                     print("Escolha inválida. Tente novamente!")
 
     def menu_cliente(self):
-        from listas.listas import pessoas
-
-        for i, p in enumerate(pessoas):
-            print(f"[{i}]: {p.upper()}")
+        for i, pessoa in enumerate(self.lista_pessoas):
+            print(f"[{i}] {pessoa.nome}")
+            self.nomes_clientes.append(pessoa.nome.upper())
         opcao = int(
             input(f"Deseja selecionar qual cliente? [999 para voltar] "))
         if opcao == 999:
-            from menu.menu import Menu
-            voltar = Menu()
-            return voltar.menu()
+            self.menu()
         print(f"""
                     ACESSO DO CLIENTE
-                            Cliente selecionado: {pessoas[opcao].upper()}
+                            Cliente selecionado: {self.nomes_clientes[opcao].upper()}
 
                             Escolha a opção desejada:
                                 1 - Listar minhas contas bancárias
@@ -88,7 +87,11 @@ class Menu:
                 if escolha == 1:
                     pass
                 elif escolha == 2:
-                    pass
+                    c = Cliente(self.nomes_clientes[opcao].upper())
+                    valor_deposito = float(
+                        input("Qual valor deseja depositar? "))
+                    c.deposito(valor_deposito)
+                    c.saldo()
                 elif escolha == 3:
                     pass
                 elif escolha == 4:
@@ -96,7 +99,7 @@ class Menu:
                 elif escolha == 5:
                     pass
                 elif escolha == 6:
-                    pass
+                    self.menu_cliente()
                 else:
                     print("Escolha inválida. Tente novamente!")
 
@@ -122,50 +125,48 @@ class Menu:
                     idade = int(input("Informe a idade da pessoa: "))
                     new_pessoa = Pessoa(nome=nome, cpf=cpf, idade=idade)
                     self.lista_pessoas.append(new_pessoa)
+                    for i, pessoa in enumerate(self.lista_pessoas):
+                        self.nomes_clientes.append(pessoa.nome.upper())
                 elif escolha == 2:
                     for i, pessoa in enumerate(self.lista_pessoas):
                         print(f"[{i}] {pessoa.nome}")
-                elif escolha == 6:
-                    self.menu_principal()
-                """elif escolha == 3:
+                elif escolha == 3:
                     pes_pessoa = input(
                         "Qual pessoa deseja pesquisar? ").upper()
-                    for p in self.lista_pessoas:
-                        if (pes_pessoa in p.nome) == True:
-                            print(
-                                f"A pessoa {pes_pessoa.upper()} se encontra na lista de pessoas do sistema.")
-                        else:
-                            print(
-                                f"A pessoa {pes_pessoa.upper()} NÃO se encontra na lista de pessoas do sistema.")
-                elif escolha == 4:
-                    print("-" * 30)
-                    for i, p in enumerate(pessoas):
-                        print(f"[{i}]: {p}")
-                    print("-" * 30)
-                    excluir_pessoa = int(
-                        input("Deseja excluir qual pessoa? "))
-                    print(
-                        f"A pessoa {pessoas[excluir_pessoa]} foi removida com sucesso!")
-                    del pessoas[excluir_pessoa]
-                    print(f"Nova lista de pessoas: {pessoas}")
-                elif escolha == 5:
-                    print("-" * 30)
-                    for i, b in enumerate(pessoas):
-                        print(f"[{i}]: {b}")
-                    print("-" * 30)
-                    atualizar_pessoa = int(
-                        input("Deseja atualizar qual pessoa? "))
-                    pessoas[atualizar_pessoa] = input(
-                        f"Atualizar pessoa {pessoas[atualizar_pessoa]} para: ").upper()
-                    print(
-                        f"A pessoa {pessoas[atualizar_pessoa]} foi atualizada com sucesso!")
-                    print(f"Nova lista de pessoas: {pessoas}")
+                    if (pes_pessoa in self.nomes_clientes) == True:
+                        print(
+                            f"A pessoa {pes_pessoa.upper()} se encontra na lista de pessoas do sistema.")
+                    else:
+                        print(
+                            f"A pessoa {pes_pessoa.upper()} NÃO se encontra na lista de pessoas do sistema.")
+                # elif escolha == 4:
+                #     print("-" * 30)
+                #     for i, p in enumerate(self.lista_pessoas):
+                #         print(f"[{i}]: {p.nome}")
+                #     print("-" * 30)
+                #     excluir_pessoa = int(
+                #         input("Deseja excluir qual pessoa? "))
+                #     print(
+                #         f"A pessoa {} foi removida com sucesso!")
+                #     print("Nova lista de pessoas: ")
+                #     for i, p in enumerate(self.lista_pessoas):
+                #         print(f"[{i}]: {p.nome}")
+                # elif escolha == 5:
+                #     print("-" * 30)
+                #     for i, b in enumerate(pessoas):
+                #         print(f"[{i}]: {b}")
+                #     print("-" * 30)
+                #     atualizar_pessoa = int(
+                #         input("Deseja atualizar qual pessoa? "))
+                #     pessoas[atualizar_pessoa] = input(
+                #         f"Atualizar pessoa {pessoas[atualizar_pessoa]} para: ").upper()
+                #     print(
+                #         f"A pessoa {pessoas[atualizar_pessoa]} foi atualizada com sucesso!")
+                #     print(f"Nova lista de pessoas: {pessoas}")
                 elif escolha == 6:
-                    from sistema.sistema import Sistema
-                    voltar = Sistema()
-                    return voltar.menu_principal()
+                    self.menu_principal()
                 else:
-                    print("Escolha inválida. Tente novamente!")"""
+                    print("Escolha inválida. Tente novamente!")
 
     def sair(self):
         print("Saindo do programa...")

@@ -1,6 +1,6 @@
 class Pessoa:
     """
-    Menu de gerenciamento de pessoas.
+    Classe para gerir as informações de uma pessoa.
     """
 
     nome: str

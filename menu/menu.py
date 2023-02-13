@@ -9,7 +9,7 @@ class Menu:
     lista_clientes: list = []
     lista_bancos: list = []
     lista_pessoas: list = []
-    nomes_clientes: list = []
+    lista_temporaria: list = []
 
     def menu(self):
         print("""
@@ -61,24 +61,26 @@ class Menu:
 
     def menu_cliente(self):
         for i, pessoa in enumerate(self.lista_pessoas):
-            print(f"[{i}] {pessoa.nome}")
-            self.nomes_clientes.append(pessoa.nome.upper())
+            print(f"[{i}] {pessoa[0]}")
         opcao = int(
             input(f"Deseja selecionar qual cliente? [999 para voltar] "))
         if opcao == 999:
             self.menu()
-        print(f"""
-                    ACESSO DO CLIENTE
-                            Cliente selecionado: {self.nomes_clientes[opcao].upper()}
+        for i, pessoa in enumerate(self.lista_pessoas):
+            if i == opcao:
+                print(f"""
+                            ACESSO DO CLIENTE
+                                    Cliente selecionado: {pessoa[0]}
 
-                            Escolha a opção desejada:
-                                1 - Listar minhas contas bancárias
-                                2 - Efetuar Depósito
-                                3 - Efetuar Saque
-                                4 - Efetuar Transferência
-                                5 - Obter Extrato
-                                6 - Voltar Menu Anterior
-                            """)
+                                    Escolha a opção desejada:
+                                        1 - Listar minhas contas bancárias
+                                        2 - Efetuar Depósito
+                                        3 - Efetuar Saque
+                                        4 - Efetuar Transferência
+                                        5 - Obter Extrato
+                                        6 - Voltar Menu Anterior
+                                    """)
+        c = Cliente(self.lista_pessoas[opcao])
         while True:
             escolha = int(input("Sua opção: "))
             if escolha not in range(1, 7):
@@ -87,17 +89,19 @@ class Menu:
                 if escolha == 1:
                     pass
                 elif escolha == 2:
-                    c = Cliente(self.nomes_clientes[opcao].upper())
                     valor_deposito = float(
                         input("Qual valor deseja depositar? "))
                     c.deposito(valor_deposito)
-                    c.saldo()
+                    print(c.extrato())
                 elif escolha == 3:
-                    pass
+                    saque = float(
+                        input("Quanto deseja sacar? "))
+                    c.saque(saque)
+                    print(c.extrato())
                 elif escolha == 4:
                     pass
                 elif escolha == 5:
-                    pass
+                    print(c.extrato())
                 elif escolha == 6:
                     self.menu_cliente()
                 else:
@@ -120,25 +124,33 @@ class Menu:
                 print("Escolha inválida. Tente novamente!")
             else:
                 if escolha == 1:
-                    nome = str(input("Informe o nome da pessoa: ").upper())
-                    cpf = str(input("Informe o CPF da pessoa: "))
-                    idade = int(input("Informe a idade da pessoa: "))
-                    new_pessoa = Pessoa(nome=nome, cpf=cpf, idade=idade)
-                    self.lista_pessoas.append(new_pessoa)
-                    for i, pessoa in enumerate(self.lista_pessoas):
-                        self.nomes_clientes.append(pessoa.nome.upper())
+                    self.lista_temporaria.append(
+                        str(input("Informe o nome da pessoa: ").upper()))
+                    self.lista_temporaria.append(
+                        str(input("Informe o CPF da pessoa: ")))
+                    self.lista_temporaria.append(
+                        int(input("Informe a idade da pessoa: ")))
+                    new_pessoa = Pessoa(
+                        nome=self.lista_temporaria[0], cpf=self.lista_temporaria[1], idade=self.lista_temporaria[2])
+                    self.lista_pessoas.append(self.lista_temporaria[:])
+                    self.lista_temporaria.clear()
                 elif escolha == 2:
                     for i, pessoa in enumerate(self.lista_pessoas):
-                        print(f"[{i}] {pessoa.nome}")
+                        print(f"[{i}] {pessoa[0]}")
                 elif escolha == 3:
                     pes_pessoa = input(
                         "Qual pessoa deseja pesquisar? ").upper()
-                    if (pes_pessoa in self.nomes_clientes) == True:
-                        print(
-                            f"A pessoa {pes_pessoa.upper()} se encontra na lista de pessoas do sistema.")
-                    else:
-                        print(
-                            f"A pessoa {pes_pessoa.upper()} NÃO se encontra na lista de pessoas do sistema.")
+                    for i, pessoa in enumerate(self.lista_pessoas):
+                        if pes_pessoa == pessoa[0]:
+                            print(
+                                f"A pessoa {pes_pessoa.upper()} se encontra na lista de pessoas do sistema.")
+                            break
+                        elif i == (len(self.lista_pessoas) - 1):
+                            if (pes_pessoa == pessoa[0]) == False:
+                                print(
+                                    f"A pessoa {pes_pessoa.upper()} NÃO se encontra na lista de pessoas do sistema.")
+                        else:
+                            continue
                 # elif escolha == 4:
                 #     print("-" * 30)
                 #     for i, p in enumerate(self.lista_pessoas):

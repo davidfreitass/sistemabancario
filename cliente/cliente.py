@@ -21,5 +21,5 @@ class Cliente():
         self.transacoes.append({"tipo": "debito", "valor": valor})
         self.saldo -= valor
 
-    def saldo(self) -> float:
-        return (f"SALDO ATUAL: {self.saldo}")
+    def extrato(self) -> str:
+        return f"SALDO ATUAL: {self.saldo:.2f}"

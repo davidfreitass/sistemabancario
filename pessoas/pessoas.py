@@ -11,3 +11,6 @@ class Pessoa:
         self.nome = nome
         self.cpf = cpf
         self.idade = idade
+
+    def __str__(self) -> str:
+        return f"Nome: {self.nome} | CPF: {self.cpf} | Idade: {self.idade}"

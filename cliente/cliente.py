@@ -23,3 +23,6 @@ class Cliente():
 
     def extrato(self) -> str:
         return f"SALDO ATUAL: {self.saldo:.2f}"
+
+    def __str__(self) -> str:
+        return f"Nome: {self.pessoa.nome} | CPF: {self.pessoa.cpf} | Idade: {self.pessoa.idade}"

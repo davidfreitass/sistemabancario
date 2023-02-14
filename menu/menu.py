@@ -80,7 +80,6 @@ class Menu:
                                         5 - Obter Extrato
                                         6 - Voltar Menu Anterior
                                     """)
-        c = Cliente(self.lista_pessoas[opcao])
         while True:
             escolha = int(input("Sua opção: "))
             if escolha not in range(1, 7):
@@ -91,17 +90,17 @@ class Menu:
                 elif escolha == 2:
                     valor_deposito = float(
                         input("Qual valor deseja depositar? "))
-                    c.deposito(valor_deposito)
-                    print(c.extrato())
+                    self.c.deposito(valor_deposito)
+                    print(self.c.extrato())
                 elif escolha == 3:
                     saque = float(
                         input("Quanto deseja sacar? "))
-                    c.saque(saque)
-                    print(c.extrato())
+                    self.c.saque(saque)
+                    print(self.c.extrato())
                 elif escolha == 4:
                     pass
                 elif escolha == 5:
-                    print(c.extrato())
+                    print(self.c.extrato())
                 elif escolha == 6:
                     self.menu_cliente()
                 else:
@@ -133,6 +132,9 @@ class Menu:
                     new_pessoa = Pessoa(
                         nome=self.lista_temporaria[0], cpf=self.lista_temporaria[1], idade=self.lista_temporaria[2])
                     self.lista_pessoas.append(self.lista_temporaria[:])
+                    self.lista_clientes.append(new_pessoa)
+                    for i, c in enumerate(self.lista_clientes):
+                        self.c = Cliente(c)
                     self.lista_temporaria.clear()
                 elif escolha == 2:
                     for i, pessoa in enumerate(self.lista_pessoas):

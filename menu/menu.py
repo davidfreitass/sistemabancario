@@ -80,8 +80,6 @@ class Menu:
             input(f"Deseja selecionar qual cliente? [999 para voltar] "))
         if opcao == 999:
             self.menu()
-        # for i, cliente in enumerate(self.lista_clientes):
-        #     if i == opcao:
         nome_pessoa = self.lista_clientes[opcao].pessoa.nome
         self.exibir_menu_cliente(nome_pessoa)
         while True:
@@ -95,7 +93,6 @@ class Menu:
                     valor_deposito = float(
                         input("Qual valor deseja depositar? "))
                     self.lista_clientes[opcao].deposito(valor_deposito)
-                    # self.c.deposito(valor_deposito)
                     print(self.lista_clientes[opcao].extrato())
                     self.exibir_menu_cliente(nome_pessoa)
                 elif escolha == 3:
@@ -103,16 +100,18 @@ class Menu:
                         input("Quanto deseja sacar? "))
                     self.lista_clientes[opcao].saque(valor_saque)
                     print(self.lista_clientes[opcao].extrato())
+                    self.exibir_menu_cliente(nome_pessoa)
                 elif escolha == 4:
                     pass
                 elif escolha == 5:
                     print(self.lista_clientes[opcao].extrato())
+                    self.exibir_menu_cliente(nome_pessoa)
                 elif escolha == 6:
                     self.menu_cliente()
                 else:
                     print("Escolha inválida. Tente novamente!")
 
-    def menu_pessoa(self):
+    def exibir_menu_pessoa(self):
         print("""
             GERENCIAR PESSOAS
                 Escolha a opção desejada:
@@ -123,6 +122,9 @@ class Menu:
                     5 - Atualizar Pessoa
                     6 - Voltar Menu Anterior
         """)
+
+    def menu_pessoa(self):
+        self.exibir_menu_pessoa()
         while True:
             escolha = int(input("Sua opção: "))
             if escolha not in range(1, 7):
@@ -140,9 +142,11 @@ class Menu:
                     )
                     self.lista_pessoas.append(new_pessoa)
                     self.lista_clientes.append(Cliente(pessoa=new_pessoa))
+                    self.exibir_menu_pessoa()
                 elif escolha == 2:
                     for i, pessoa in enumerate(self.lista_pessoas):
-                        print(f"[{i}] {pessoa[0]}")
+                        print(f"[{i}] {pessoa.nome}")
+                    self.exibir_menu_pessoa()
                 elif escolha == 3:
                     pes_pessoa = input(
                         "Qual pessoa deseja pesquisar pelo nome? ").upper()
@@ -150,11 +154,13 @@ class Menu:
                         if pes_pessoa == pessoa.nome:
                             print(
                                 f"A pessoa {pes_pessoa} se encontra na lista de pessoas do sistema.")
+                            self.exibir_menu_pessoa()
                             break
                         elif i == (len(self.lista_pessoas) - 1):
                             if (pes_pessoa == pessoa.nome) == False:
                                 print(
                                     f"A pessoa {pes_pessoa} NÃO se encontra na lista de pessoas do sistema.")
+                                self.exibir_menu_pessoa()
                         else:
                             continue
                 # elif escolha == 4:

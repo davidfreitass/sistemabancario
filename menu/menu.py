@@ -53,7 +53,7 @@ class Menu:
                 elif escolha == 3:
                     pass
                 elif escolha == 4:
-                    pass
+                    self.menu_contas()
                 elif escolha == 5:
                     self.menu()
                 else:
@@ -88,7 +88,8 @@ class Menu:
                 print("Escolha inválida. Tente novamente!")
             else:
                 if escolha == 1:
-                    pass
+                    for i, conta in enumerate(self.lista_clientes[opcao].contas):
+                        print(f"[{i}] {conta.banco}")
                 elif escolha == 2:
                     valor_deposito = float(
                         input("Qual valor deseja depositar? "))
@@ -191,6 +192,38 @@ class Menu:
                     self.menu_principal()
                 else:
                     print("Escolha inválida. Tente novamente!")
+
+    def exibir_menu_contas(self, nome_pessoa):
+        print(f"""
+                            Cliente selecionado: {nome_pessoa}
+
+                            Escolha a opção desejada:
+                                1 - Adicionar Conta
+                                2 - Excluir Conta
+                                3 - Voltar Menu Anterior
+                            """)
+
+    def menu_contas(self):
+        for i, cliente in enumerate(self.lista_clientes):
+            print(f"[{i}] {cliente.pessoa.nome}")
+        opcao = int(
+            input(f"Deseja selecionar qual cliente? [999 para voltar] "))
+        if opcao == 999:
+            self.menu_principal()
+        nome_pessoa = self.lista_clientes[opcao].pessoa.nome
+        self.exibir_menu_contas(nome_pessoa)
+        while True:
+            escolha = int(input("Sua opção: "))
+            if escolha not in range(1, 4):
+                print("Escolha inválida. Tente novamente!")
+            else:
+                if escolha == 1:
+                    self.lista_clientes[opcao].criar_conta()
+                    self.exibir_menu_contas(nome_pessoa)
+                elif escolha == 2:
+                    pass
+                elif escolha == 3:
+                    self.menu_contas()
 
     def sair(self):
         print("Saindo do programa...")

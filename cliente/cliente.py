@@ -9,6 +9,7 @@ class Cliente():
     transacoes: list = []
     saldo:  float = 0.0
     pessoa: Pessoa
+    # contas: list = []
 
     def __init__(self, pessoa: Pessoa) -> None:
         self.pessoa = pessoa

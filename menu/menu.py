@@ -91,16 +91,26 @@ class Menu:
                     for i, conta in enumerate(self.lista_clientes[opcao].contas):
                         print(f"[{i}] {conta.banco}")
                 elif escolha == 2:
+                    for i, conta in enumerate(self.lista_clientes[opcao].contas):
+                        print(f"[{i}] {conta.banco}")
+                    conta_deposito = int(input("Em que conta? "))
                     valor_deposito = float(
-                        input("Qual valor deseja depositar? "))
-                    self.lista_clientes[opcao].deposito(valor_deposito)
-                    print(self.lista_clientes[opcao].extrato())
+                        input(f"Qual valor deseja depositar no banco {self.lista_clientes[opcao].contas[conta_deposito].banco}? "))
+                    self.lista_clientes[opcao].contas[conta_deposito].deposito(
+                        valor_deposito)
+                    print(
+                        self.lista_clientes[opcao].contas[conta_deposito].extrato())
                     self.exibir_menu_cliente(nome_pessoa)
                 elif escolha == 3:
+                    for i, conta in enumerate(self.lista_clientes[opcao].contas):
+                        print(f"[{i}] {conta.banco}")
+                    conta_saque = int(input("Deseja sacar em que conta? "))
                     valor_saque = float(
-                        input("Quanto deseja sacar? "))
-                    self.lista_clientes[opcao].saque(valor_saque)
-                    print(self.lista_clientes[opcao].extrato())
+                        input(f"Quanto deseja sacar no banco {self.lista_clientes[opcao].contas[conta_saque].banco}? "))
+                    self.lista_clientes[opcao].contas[conta_saque].saque(
+                        valor_saque)
+                    print(
+                        self.lista_clientes[opcao].contas[conta_saque].extrato())
                     self.exibir_menu_cliente(nome_pessoa)
                 elif escolha == 4:
                     pass

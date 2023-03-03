@@ -14,7 +14,7 @@ class Cliente():
 
     def criar_conta(self):
         from conta.conta import Conta
-        nova_conta = Conta(str(input("Nome do banco: ")))
+        nova_conta = Conta(str(input("Nome do banco: ").upper()))
         self.contas.append(nova_conta)
 
     def __str__(self) -> str:

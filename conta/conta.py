@@ -1,4 +1,5 @@
 from cliente.cliente import Cliente
+import datetime
 
 
 class Conta:
@@ -21,5 +22,12 @@ class Conta:
         self.transacoes.append({"tipo": "debito", "valor": valor})
         self.saldo -= valor
 
-    def extrato(self) -> str:
-        return f"SALDO ATUAL: {self.saldo:.2f}"
+    def extrato(self):
+        print('=' * 60)
+        print(f"| SALDO ATUAL:".ljust(0),
+              f"{self.saldo:.2f} |".rjust(60 - len('| SALDO ATUAL:')))
+        print(f"| ÚLTIMA TRANSAÇÃO:".ljust(0),
+              f"{self.transacoes[-1]} |".rjust(60 - len('| Última transação:')))
+        print(f"| DATA/HORA:".ljust(0),
+              f"{datetime.datetime.now().ctime()} |".rjust(60 - len('| DATA/HORA:')))
+        print('=' * 60)

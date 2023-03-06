@@ -1,4 +1,3 @@
-from cliente.cliente import Cliente
 import datetime
 
 

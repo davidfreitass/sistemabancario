@@ -1,3 +1,4 @@
+from conta.conta import Conta
 from pessoas.pessoas import Pessoa
 
 
@@ -7,14 +8,15 @@ class Cliente():
     """
 
     pessoa: Pessoa
-    contas: list = []
+    contas: list = list()
 
-    def __init__(self, pessoa: Pessoa) -> None:
+    def __init__(self, pessoa: Pessoa, contas=[]) -> None:
         self.pessoa = pessoa
+        self.contas = contas
 
-    def criar_conta(self):
-        from conta.conta import Conta
-        nova_conta = Conta(str(input("Nome do banco: ").upper()))
+    def vincular_conta(self, nova_conta: Conta):
+        if len(self.contas) <= 0:
+            self.contas = list()
         self.contas.append(nova_conta)
 
     def __str__(self) -> str:

@@ -1,5 +1,6 @@
 from pessoas.pessoas import Pessoa
 from cliente.cliente import Cliente
+from conta.conta import Conta
 
 
 class Menu:
@@ -90,6 +91,7 @@ class Menu:
                 if escolha == 1:
                     for i, conta in enumerate(self.lista_clientes[opcao].contas):
                         print(f"[{i}] {conta.banco}")
+                    self.exibir_menu_cliente(nome_pessoa)
                 elif escolha == 2:
                     for i, conta in enumerate(self.lista_clientes[opcao].contas):
                         print(f"[{i}] {conta.banco}")
@@ -98,8 +100,7 @@ class Menu:
                         input(f"Qual valor deseja depositar no banco {self.lista_clientes[opcao].contas[conta_deposito].banco}? "))
                     self.lista_clientes[opcao].contas[conta_deposito].deposito(
                         valor_deposito)
-                    print(
-                        self.lista_clientes[opcao].contas[conta_deposito].extrato())
+                    self.lista_clientes[opcao].contas[conta_deposito].extrato()
                     self.exibir_menu_cliente(nome_pessoa)
                 elif escolha == 3:
                     for i, conta in enumerate(self.lista_clientes[opcao].contas):
@@ -109,13 +110,16 @@ class Menu:
                         input(f"Quanto deseja sacar no banco {self.lista_clientes[opcao].contas[conta_saque].banco}? "))
                     self.lista_clientes[opcao].contas[conta_saque].saque(
                         valor_saque)
-                    print(
-                        self.lista_clientes[opcao].contas[conta_saque].extrato())
+                    self.lista_clientes[opcao].contas[conta_saque].extrato()
                     self.exibir_menu_cliente(nome_pessoa)
                 elif escolha == 4:
                     pass
                 elif escolha == 5:
-                    print(self.lista_clientes[opcao].extrato())
+                    for i, conta in enumerate(self.lista_clientes[opcao].contas):
+                        print(f"[{i}] {conta.banco}")
+                    conta_extrato = int(
+                        input("Deseja receber o extrato de qual conta? "))
+                    self.lista_clientes[opcao].contas[conta_extrato].extrato()
                     self.exibir_menu_cliente(nome_pessoa)
                 elif escolha == 6:
                     self.menu_cliente()
@@ -152,7 +156,8 @@ class Menu:
                         idade=idade_pessoa
                     )
                     self.lista_pessoas.append(new_pessoa)
-                    self.lista_clientes.append(Cliente(pessoa=new_pessoa))
+                    new_cliente = Cliente(pessoa=new_pessoa)
+                    self.lista_clientes.append(new_cliente)
                     self.exibir_menu_pessoa()
                 elif escolha == 2:
                     for i, pessoa in enumerate(self.lista_pessoas):
@@ -228,7 +233,10 @@ class Menu:
                 print("Escolha inválida. Tente novamente!")
             else:
                 if escolha == 1:
-                    self.lista_clientes[opcao].criar_conta()
+                    banco = str(input("Nome do banco: ").upper())
+                    nova_conta = Conta(banco=banco)
+                    cliente_selecionado = self.lista_clientes[opcao]
+                    cliente_selecionado.vincular_conta(nova_conta)
                     self.exibir_menu_contas(nome_pessoa)
                 elif escolha == 2:
                     pass

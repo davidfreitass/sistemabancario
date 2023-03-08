@@ -10,9 +10,8 @@ class Cliente():
     pessoa: Pessoa
     contas: list = list()
 
-    def __init__(self, pessoa: Pessoa, contas=[]) -> None:
+    def __init__(self, pessoa: Pessoa) -> None:
         self.pessoa = pessoa
-        self.contas = contas
 
     def vincular_conta(self, nova_conta: Conta):
         if len(self.contas) <= 0:

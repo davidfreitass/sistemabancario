@@ -10,7 +10,6 @@ class Menu:
     lista_clientes: list = []
     lista_bancos: list = []
     lista_pessoas: list = []
-    lista_temporaria: list = []
 
     def menu(self):
         print("""
@@ -29,8 +28,6 @@ class Menu:
                 self.menu_cliente()
             elif escolha == 3:
                 self.sair()
-            else:
-                print("Escolha inválida. Tente novamente!")
 
     def menu_principal(self):
         print("""
@@ -77,54 +74,114 @@ class Menu:
     def menu_cliente(self):
         for i, cliente in enumerate(self.lista_clientes):
             print(f"[{i}] {cliente.pessoa.nome}")
-        opcao = int(
-            input(f"Deseja selecionar qual cliente? [999 para voltar] "))
-        if opcao == 999:
-            self.menu()
-        nome_pessoa = self.lista_clientes[opcao].pessoa.nome
-        self.exibir_menu_cliente(nome_pessoa)
         while True:
-            escolha = int(input("Sua opção: "))
-            if escolha not in range(1, 7):
+            opcao = int(
+                input(f"Deseja selecionar qual cliente? [999 para voltar] "))
+            if opcao == 999:
+                self.menu()
+            elif opcao not in range(0, len(self.lista_clientes)):
                 print("Escolha inválida. Tente novamente!")
             else:
-                if escolha == 1:
-                    for i, conta in enumerate(self.lista_clientes[opcao].contas):
-                        print(f"[{i}] {conta.banco}")
-                    self.exibir_menu_cliente(nome_pessoa)
-                elif escolha == 2:
-                    for i, conta in enumerate(self.lista_clientes[opcao].contas):
-                        print(f"[{i}] {conta.banco}")
-                    conta_deposito = int(input("Em que conta? "))
-                    valor_deposito = float(
-                        input(f"Qual valor deseja depositar no banco {self.lista_clientes[opcao].contas[conta_deposito].banco}? "))
-                    self.lista_clientes[opcao].contas[conta_deposito].deposito(
-                        valor_deposito)
-                    self.lista_clientes[opcao].contas[conta_deposito].extrato()
-                    self.exibir_menu_cliente(nome_pessoa)
-                elif escolha == 3:
-                    for i, conta in enumerate(self.lista_clientes[opcao].contas):
-                        print(f"[{i}] {conta.banco}")
-                    conta_saque = int(input("Deseja sacar em que conta? "))
-                    valor_saque = float(
-                        input(f"Quanto deseja sacar no banco {self.lista_clientes[opcao].contas[conta_saque].banco}? "))
-                    self.lista_clientes[opcao].contas[conta_saque].saque(
-                        valor_saque)
-                    self.lista_clientes[opcao].contas[conta_saque].extrato()
-                    self.exibir_menu_cliente(nome_pessoa)
-                elif escolha == 4:
-                    pass
-                elif escolha == 5:
-                    for i, conta in enumerate(self.lista_clientes[opcao].contas):
-                        print(f"[{i}] {conta.banco}")
-                    conta_extrato = int(
-                        input("Deseja receber o extrato de qual conta? "))
-                    self.lista_clientes[opcao].contas[conta_extrato].extrato()
-                    self.exibir_menu_cliente(nome_pessoa)
-                elif escolha == 6:
-                    self.menu_cliente()
-                else:
-                    print("Escolha inválida. Tente novamente!")
+                nome_pessoa = self.lista_clientes[opcao].pessoa.nome
+                self.exibir_menu_cliente(nome_pessoa)
+                while True:
+                    escolha = int(input("Sua opção: "))
+                    if escolha not in range(1, 7):
+                        print("Escolha inválida. Tente novamente!")
+                    else:
+                        if escolha == 1:
+                            for i, conta in enumerate(self.lista_clientes[opcao].contas):
+                                print(f"[{i}] {conta.banco}")
+                            self.exibir_menu_cliente(nome_pessoa)
+                        elif escolha == 2:
+                            for i, conta in enumerate(self.lista_clientes[opcao].contas):
+                                print(f"[{i}] {conta.banco}")
+                            while True:
+                                conta_deposito = int(input("Em que conta? "))
+                                if conta_deposito not in range(0, len(self.lista_clientes[opcao].contas)):
+                                    print("Escolha inválida. Tente novamente!")
+                                else:
+                                    valor_deposito = float(
+                                        input(f"Qual valor deseja depositar no banco {self.lista_clientes[opcao].contas[conta_deposito].banco}? "))
+                                    self.lista_clientes[opcao].contas[conta_deposito].deposito(
+                                        valor_deposito)
+                                    self.lista_clientes[opcao].contas[conta_deposito].extrato(
+                                    )
+                                    self.exibir_menu_cliente(nome_pessoa)
+                                    break
+                        elif escolha == 3:
+                            for i, conta in enumerate(self.lista_clientes[opcao].contas):
+                                print(f"[{i}] {conta.banco}")
+                            while True:
+                                conta_saque = int(
+                                    input("Deseja sacar em que conta? "))
+                                if conta_saque not in range(0, len(self.lista_clientes[opcao].contas)):
+                                    print("Escolha inválida. Tente novamente!")
+                                else:
+                                    valor_saque = float(
+                                        input(f"Quanto deseja sacar no banco {self.lista_clientes[opcao].contas[conta_saque].banco}? "))
+                                    self.lista_clientes[opcao].contas[conta_saque].saque(
+                                        valor_saque)
+                                    self.lista_clientes[opcao].contas[conta_saque].extrato(
+                                    )
+                                    self.exibir_menu_cliente(nome_pessoa)
+                                    break
+                        elif escolha == 4:
+                            for i, conta in enumerate(self.lista_clientes[opcao].contas):
+                                print(f"[{i}] {conta.banco}")
+                            while True:
+                                conta_transferencia_1 = int(
+                                    input("De qual conta? "))
+                                if conta_transferencia_1 not in range(0, len(self.lista_clientes[opcao].contas)):
+                                    print(
+                                        "Escolha inválida. Tente novamente!")
+                                else:
+                                    for i, cliente in enumerate(self.lista_clientes):
+                                        print(f"[{i}] {cliente.pessoa.nome}")
+                                    while True:
+                                        opcao_transferencia = int(
+                                            input(f"Para qual cliente? [999 para voltar] "))
+                                        if opcao_transferencia == 999:
+                                            self.exibir_menu_cliente()
+                                        elif opcao_transferencia not in range(0, len(self.lista_clientes)):
+                                            print(
+                                                "Escolha inválida. Tente novamente!")
+                                        else:
+                                            for i, conta in enumerate(self.lista_clientes[opcao_transferencia].contas):
+                                                print(f"[{i}] {conta.banco}")
+                                            while True:
+                                                conta_transferencia_2 = int(
+                                                    input("Para qual conta? "))
+                                                if conta_transferencia_2 not in range(0, len(self.lista_clientes[opcao_transferencia].contas)):
+                                                    print(
+                                                        "Escolha inválida. Tente novamente!")
+                                                else:
+                                                    valor_transferencia = float(input(
+                                                        f"Qual valor transferir para o cliente {self.lista_clientes[opcao_transferencia].pessoa.nome}? "))
+                                                    self.lista_clientes[opcao].contas[conta_transferencia_1].saque(
+                                                        valor_transferencia)
+                                                    self.lista_clientes[opcao_transferencia].contas[conta_transferencia_2].deposito(
+                                                        valor_transferencia)
+                                                    self.exibir_menu_cliente(
+                                                        nome_pessoa)
+                                                    break
+                                            break
+                                    break
+                        elif escolha == 5:
+                            for i, conta in enumerate(self.lista_clientes[opcao].contas):
+                                print(f"[{i}] {conta.banco}")
+                            while True:
+                                conta_extrato = int(
+                                    input("Deseja receber o extrato de qual conta? "))
+                                if conta_extrato not in range(0, len(self.lista_clientes[opcao].contas)):
+                                    print("Escolha inválida. Tente novamente!")
+                                else:
+                                    self.lista_clientes[opcao].contas[conta_extrato].extrato(
+                                    )
+                                    self.exibir_menu_cliente(nome_pessoa)
+                                    break
+                        elif escolha == 6:
+                            self.menu_cliente()
 
     def exibir_menu_pessoa(self):
         print("""
@@ -148,8 +205,10 @@ class Menu:
                 if escolha == 1:
                     nome_pessoa = str(
                         input("Informe o nome da pessoa: ").upper())
-                    cpf_pessoa = str(input("Informe o CPF da pessoa: "))
-                    idade_pessoa = int(input("Informe a idade da pessoa: "))
+                    cpf_pessoa = str(
+                        input("Informe o CPF da pessoa: "))
+                    idade_pessoa = int(
+                        input("Informe a idade da pessoa: "))
                     new_pessoa = Pessoa(
                         nome=nome_pessoa,
                         cpf=cpf_pessoa,
@@ -205,8 +264,6 @@ class Menu:
                 #     print(f"Nova lista de pessoas: {pessoas}")
                 elif escolha == 6:
                     self.menu_principal()
-                else:
-                    print("Escolha inválida. Tente novamente!")
 
     def exibir_menu_contas(self, nome_pessoa):
         print(f"""
@@ -221,27 +278,35 @@ class Menu:
     def menu_contas(self):
         for i, cliente in enumerate(self.lista_clientes):
             print(f"[{i}] {cliente.pessoa.nome}")
-        opcao = int(
-            input(f"Deseja selecionar qual cliente? [999 para voltar] "))
-        if opcao == 999:
-            self.menu_principal()
-        nome_pessoa = self.lista_clientes[opcao].pessoa.nome
-        self.exibir_menu_contas(nome_pessoa)
         while True:
-            escolha = int(input("Sua opção: "))
-            if escolha not in range(1, 4):
+            opcao = int(
+                input(f"Deseja selecionar qual cliente? [999 para voltar] "))
+            if opcao == 999:
+                self.menu_principal()
+            elif opcao not in range(0, len(self.lista_clientes)):
                 print("Escolha inválida. Tente novamente!")
             else:
-                if escolha == 1:
-                    banco = str(input("Nome do banco: ").upper())
-                    nova_conta = Conta(banco=banco)
-                    cliente_selecionado = self.lista_clientes[opcao]
-                    cliente_selecionado.vincular_conta(nova_conta)
-                    self.exibir_menu_contas(nome_pessoa)
-                elif escolha == 2:
-                    pass
-                elif escolha == 3:
-                    self.menu_contas()
+                nome_pessoa = self.lista_clientes[opcao].pessoa.nome
+                self.exibir_menu_contas(nome_pessoa)
+                while True:
+                    escolha = int(input("Sua opção: "))
+                    if escolha not in range(1, 4):
+                        print("Escolha inválida. Tente novamente!")
+                    else:
+                        if escolha == 1:
+                            banco = str(input("Nome do banco: ").upper())
+                            nova_conta = Conta(banco=banco)
+                            self.lista_clientes[opcao].vincular_conta(
+                                nova_conta)
+                            frase = f"Foi adicionado uma conta no banco {banco} a pessoa {nome_pessoa}."
+                            print('=' * len(frase))
+                            print(frase)
+                            print('=' * len(frase))
+                            self.exibir_menu_contas(nome_pessoa)
+                        elif escolha == 2:
+                            pass
+                        elif escolha == 3:
+                            self.menu_contas()
 
     def sair(self):
         print("Saindo do programa...")

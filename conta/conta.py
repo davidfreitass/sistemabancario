@@ -6,7 +6,7 @@ class Conta:
     Classe para gerir as traansações de cada conta dos clientes.
     """
 
-    transacoes: list = []
+    transacoes: list = list()
     saldo:  float = 0.0
     banco: str
 
@@ -26,7 +26,7 @@ class Conta:
         print(f"| SALDO ATUAL:".ljust(0),
               f"{self.saldo:.2f} |".rjust(60 - len('| SALDO ATUAL:')))
         print(f"| ÚLTIMA TRANSAÇÃO:".ljust(0),
-              f"{self.transacoes[-1]} |".rjust(60 - len('| Última transação:')))
+              f"{self.transacoes[-1]} |".rjust(60 - len('| ÚLTIMA TRANSAÇÃO:')))
         print(f"| DATA/HORA:".ljust(0),
               f"{datetime.datetime.now().ctime()} |".rjust(60 - len('| DATA/HORA:')))
         print('=' * 60)

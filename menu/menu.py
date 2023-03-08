@@ -91,7 +91,10 @@ class Menu:
                     else:
                         if escolha == 1:
                             for i, conta in enumerate(self.lista_clientes[opcao].contas):
-                                print(f"[{i}] {conta.banco}")
+                                bancos1 = f"[{i}] {conta.banco}"
+                                print('='*len(bancos1))
+                                print(bancos1)
+                                print('='*len(bancos1))
                             self.exibir_menu_cliente(nome_pessoa)
                         elif escolha == 2:
                             for i, conta in enumerate(self.lista_clientes[opcao].contas):
@@ -101,6 +104,8 @@ class Menu:
                                 if conta_deposito not in range(0, len(self.lista_clientes[opcao].contas)):
                                     print("Escolha inválida. Tente novamente!")
                                 else:
+                                    print(
+                                        '='*len(f"Qual valor deseja depositar no banco {self.lista_clientes[opcao].contas[conta_deposito].banco}? "))
                                     valor_deposito = float(
                                         input(f"Qual valor deseja depositar no banco {self.lista_clientes[opcao].contas[conta_deposito].banco}? "))
                                     self.lista_clientes[opcao].contas[conta_deposito].deposito(
@@ -111,13 +116,18 @@ class Menu:
                                     break
                         elif escolha == 3:
                             for i, conta in enumerate(self.lista_clientes[opcao].contas):
-                                print(f"[{i}] {conta.banco}")
+                                bancos2 = f"[{i}] {conta.banco}"
+                                print('='*len(bancos2))
+                                print(bancos2)
+                                print('='*len(bancos2))
                             while True:
                                 conta_saque = int(
                                     input("Deseja sacar em que conta? "))
                                 if conta_saque not in range(0, len(self.lista_clientes[opcao].contas)):
                                     print("Escolha inválida. Tente novamente!")
                                 else:
+                                    print(
+                                        '='*len(f"Quanto deseja sacar no banco {self.lista_clientes[opcao].contas[conta_saque].banco}? "))
                                     valor_saque = float(
                                         input(f"Quanto deseja sacar no banco {self.lista_clientes[opcao].contas[conta_saque].banco}? "))
                                     self.lista_clientes[opcao].contas[conta_saque].saque(
@@ -128,7 +138,10 @@ class Menu:
                                     break
                         elif escolha == 4:
                             for i, conta in enumerate(self.lista_clientes[opcao].contas):
-                                print(f"[{i}] {conta.banco}")
+                                bancos3 = f"[{i}] {conta.banco}"
+                                print('='*len(bancos3))
+                                print(bancos3)
+                                print('='*len(bancos3))
                             while True:
                                 conta_transferencia_1 = int(
                                     input("De qual conta? "))
@@ -137,7 +150,13 @@ class Menu:
                                         "Escolha inválida. Tente novamente!")
                                 else:
                                     for i, cliente in enumerate(self.lista_clientes):
-                                        print(f"[{i}] {cliente.pessoa.nome}")
+                                        if cliente.pessoa.nome == nome_pessoa:
+                                            pass
+                                        else:
+                                            clientes = f"[{i}] {cliente.pessoa.nome}"
+                                            print('='*len(clientes))
+                                            print(clientes)
+                                            print('='*len(clientes))
                                     while True:
                                         opcao_transferencia = int(
                                             input(f"Para qual cliente? [999 para voltar] "))
@@ -148,7 +167,10 @@ class Menu:
                                                 "Escolha inválida. Tente novamente!")
                                         else:
                                             for i, conta in enumerate(self.lista_clientes[opcao_transferencia].contas):
-                                                print(f"[{i}] {conta.banco}")
+                                                bancos4 = f"[{i}] {conta.banco}"
+                                                print('='*len(bancos4))
+                                                print(bancos4)
+                                                print('='*len(bancos4))
                                             while True:
                                                 conta_transferencia_2 = int(
                                                     input("Para qual conta? "))
@@ -156,6 +178,8 @@ class Menu:
                                                     print(
                                                         "Escolha inválida. Tente novamente!")
                                                 else:
+                                                    print(
+                                                        '='*len(f"Qual valor transferir para o cliente {self.lista_clientes[opcao_transferencia].pessoa.nome}? "))
                                                     valor_transferencia = float(input(
                                                         f"Qual valor transferir para o cliente {self.lista_clientes[opcao_transferencia].pessoa.nome}? "))
                                                     self.lista_clientes[opcao].contas[conta_transferencia_1].saque(

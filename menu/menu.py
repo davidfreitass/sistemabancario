@@ -207,7 +207,7 @@ class Menu:
                         elif escolha == 6:
                             self.menu_cliente()
 
-    def exibir_menu_pessoa(self):
+    def menu_pessoa(self):
         print("""
             GERENCIAR PESSOAS
                 Escolha a opção desejada:
@@ -218,9 +218,6 @@ class Menu:
                     5 - Atualizar Pessoa
                     6 - Voltar Menu Anterior
         """)
-
-    def menu_pessoa(self):
-        self.exibir_menu_pessoa()
         while True:
             escolha = int(input("Sua opção: "))
             if escolha not in range(1, 7):
@@ -241,51 +238,109 @@ class Menu:
                     self.lista_pessoas.append(new_pessoa)
                     new_cliente = Cliente(pessoa=new_pessoa)
                     self.lista_clientes.append(new_cliente)
-                    self.exibir_menu_pessoa()
+                    self.menu_pessoa()
                 elif escolha == 2:
-                    for i, pessoa in enumerate(self.lista_pessoas):
-                        print(f"[{i}] {pessoa.nome}")
-                    self.exibir_menu_pessoa()
+                    if len(self.lista_pessoas) >= 1:
+                        print("-" * 30)
+                        for i, pessoa in enumerate(self.lista_pessoas):
+                            print(f"[{i}] {pessoa.nome}")
+                        print("-" * 30)
+                        self.menu_pessoa()
+                    else:
+                        print("-" * 30)
+                        print("Não há pessoas cadastradas.")
+                        print("-" * 30)
+                        self.menu_pessoa()
+
                 elif escolha == 3:
                     pes_pessoa = input(
                         "Qual pessoa deseja pesquisar pelo nome? ").upper()
                     for i, pessoa in enumerate(self.lista_pessoas):
                         if pes_pessoa == pessoa.nome:
-                            print(
-                                f"A pessoa {pes_pessoa} se encontra na lista de pessoas do sistema.")
-                            self.exibir_menu_pessoa()
-                            break
+                            frase1 = f"A pessoa {pes_pessoa} se encontra na lista de pessoas do sistema."
+                            print('-' * len(frase1))
+                            print(frase1)
+                            print('-' * len(frase1))
+                            self.menu_pessoa()
                         elif i == (len(self.lista_pessoas) - 1):
                             if (pes_pessoa == pessoa.nome) == False:
-                                print(
-                                    f"A pessoa {pes_pessoa} NÃO se encontra na lista de pessoas do sistema.")
-                                self.exibir_menu_pessoa()
+                                frase2 = f"A pessoa {pes_pessoa} NÃO se encontra na lista de pessoas do sistema."
+                                print('-' * len(frase2))
+                                print(frase2)
+                                print('-' * len(frase2))
+                                self.menu_pessoa()
                         else:
                             continue
-                # elif escolha == 4:
-                #     print("-" * 30)
-                #     for i, p in enumerate(self.lista_pessoas):
-                #         print(f"[{i}]: {p.nome}")
-                #     print("-" * 30)
-                #     excluir_pessoa = int(
-                #         input("Deseja excluir qual pessoa? "))
-                #     print(
-                #         f"A pessoa {} foi removida com sucesso!")
-                #     print("Nova lista de pessoas: ")
-                #     for i, p in enumerate(self.lista_pessoas):
-                #         print(f"[{i}]: {p.nome}")
-                # elif escolha == 5:
-                #     print("-" * 30)
-                #     for i, b in enumerate(pessoas):
-                #         print(f"[{i}]: {b}")
-                #     print("-" * 30)
-                #     atualizar_pessoa = int(
-                #         input("Deseja atualizar qual pessoa? "))
-                #     pessoas[atualizar_pessoa] = input(
-                #         f"Atualizar pessoa {pessoas[atualizar_pessoa]} para: ").upper()
-                #     print(
-                #         f"A pessoa {pessoas[atualizar_pessoa]} foi atualizada com sucesso!")
-                #     print(f"Nova lista de pessoas: {pessoas}")
+                elif escolha == 4:
+                    if len(self.lista_pessoas) >= 1:
+                        print("-" * 30)
+                        for i, p in enumerate(self.lista_pessoas):
+                            print(f"[{i}]: {p.nome}")
+                        print("-" * 30)
+                        while True:
+                            excluir_pessoa = int(
+                                input("Deseja excluir qual pessoa? [999 para voltar] "))
+                            if excluir_pessoa == 999:
+                                self.menu_pessoa()
+                            elif excluir_pessoa not in range(0, len(self.lista_pessoas)):
+                                print("Escolha inválida. Tente novamente!")
+                            else:
+                                frase_removida = f"A pessoa {self.lista_pessoas[excluir_pessoa].nome} foi removida com sucesso!"
+                                print("-" * len(frase_removida))
+                                print(frase_removida)
+                                del self.lista_pessoas[excluir_pessoa]
+                                del self.lista_clientes[excluir_pessoa]
+                                print("Nova lista de pessoas: ")
+                                if len(self.lista_pessoas) >= 1:
+                                    print("-" * 30)
+                                    for i, p in enumerate(self.lista_pessoas):
+                                        print(f"[{i}]: {p.nome}")
+                                    print("-" * 30)
+                                else:
+                                    print("-" * 30)
+                                    print("Não há pessoas cadastradas.")
+                                    print("-" * 30)
+                                self.menu_pessoa()
+                    else:
+                        print("-" * 30)
+                        print("Não há pessoas cadastradas.")
+                        print("-" * 30)
+                        self.menu_pessoa()
+
+                elif escolha == 5:
+                    if len(self.lista_pessoas) >= 1:
+                        print("-" * 30)
+                        for i, p in enumerate(self.lista_pessoas):
+                            print(f"[{i}]: {p.nome}")
+                        print("-" * 30)
+                        while True:
+                            atualizar_pessoa = int(
+                                input("Deseja atualizar qual pessoa? [999 para voltar] "))
+                            if atualizar_pessoa == 999:
+                                self.menu_pessoa()
+                            elif atualizar_pessoa not in range(0, len(self.lista_pessoas)):
+                                print("Escolha inválida. Tente novamente!")
+                            else:
+                                self.lista_pessoas[atualizar_pessoa].nome = input(
+                                    f"Alterar nome de {self.lista_pessoas[atualizar_pessoa].nome} para: ").upper()
+                                self.lista_pessoas[atualizar_pessoa].cpf = input(
+                                    f"Alterar cpf de {self.lista_pessoas[atualizar_pessoa].cpf} para: ")
+                                self.lista_pessoas[atualizar_pessoa].idade = input(
+                                    f"Alterar idade de {self.lista_pessoas[atualizar_pessoa].idade} para: ")
+                                frase_atualizada = f"A pessoa {self.lista_pessoas[atualizar_pessoa].nome} foi atualizada com sucesso!"
+                                print("-" * len(frase_atualizada))
+                                print(frase_atualizada)
+                                print("Nova lista de pessoas: ")
+                                print("-" * 30)
+                                for i, p in enumerate(self.lista_pessoas):
+                                    print(f"[{i}]: {p.nome}")
+                                print("-" * 30)
+                                self.menu_pessoa()
+                    else:
+                        print("-" * 30)
+                        print("Não há pessoas cadastradas.")
+                        print("-" * 30)
+                        self.menu_pessoa()
                 elif escolha == 6:
                     self.menu_principal()
 

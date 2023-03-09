@@ -3,7 +3,7 @@ import datetime
 
 class Conta:
     """
-    Classe para gerir as traansações de cada conta dos clientes.
+    Classe para gerir as transações de cada conta dos clientes.
     """
 
     transacoes: list = list()
@@ -37,14 +37,25 @@ class Conta:
 
     def extrato(self):
         print('=' * 60)
+        print('|'.ljust(0), 'E X T R A T O   B A N C Á R I O'.center(57), '|'.rjust(0))
+        print('=' * 60)
+        print(f"| BANCO:".ljust(0),
+              f"{self.banco} |".rjust(60 - len("| BANCO:")))
         print(f"| SALDO ATUAL:".ljust(0),
               f"{self.saldo:.2f} |".rjust(60 - len('| SALDO ATUAL:')))
-        if len(self.transacoes) >= 1:
+        if len(self.transacoes) == 1:
             print(f"| ÚLTIMA TRANSAÇÃO:".ljust(
                 0), f"{self.transacoes[-1]} |".rjust(60 - len('| ÚLTIMA TRANSAÇÃO:')))
-        else:
-            print(f"| ÚLTIMA TRANSAÇÃO:".ljust(0), f"Não houve transações |".rjust(
-                60 - len('| ÚLTIMA TRANSAÇÃO:')))
+        elif len(self.transacoes) > 1:
+            c = 1
+            for t in self.transacoes:
+                print(f"| DOC 0000{c}:".ljust(0), f"{t} |".rjust(
+                    60 - len(f"| DOC 0000{c}:")))
+                c += 1
+                if t == self.transacoes[-1]:
+                    print(f"| ÚLTIMA TRANSAÇÃO:".ljust(
+                        0), f"{self.transacoes[-1]} |".rjust(60 - len('| ÚLTIMA TRANSAÇÃO:')))
+        print('-' * 60)
         print(f"| DATA/HORA:".ljust(0),
               f"{datetime.datetime.now().ctime()} |".rjust(60 - len('| DATA/HORA:')))
         print('=' * 60)

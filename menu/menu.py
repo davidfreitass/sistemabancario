@@ -383,7 +383,29 @@ class Menu:
                             print('=' * len(frase))
                             self.exibir_menu_contas(nome_pessoa)
                         elif escolha == 2:
-                            pass
+                            print('-' * 30)
+                            for i, conta in enumerate(self.lista_clientes[opcao].contas):
+                                print(f"[{i}] {conta.banco}")
+                            print('-' * 30)
+                            while True:
+                                excluir_conta = int(
+                                    input("Deseja excluir qual conta? [999 para voltar] "))
+                                if excluir_conta == 999:
+                                    self.exibir_menu_contas(nome_pessoa)
+                                    break
+                                elif excluir_conta not in range(0, len(self.lista_clientes[opcao].contas)):
+                                    print("Escolha inválida. Tente novamente!")
+                                else:
+                                    for i, conta in enumerate(self.lista_clientes[opcao].contas):
+                                        if excluir_conta == i:
+                                            frase3 = f"A conta {conta.banco} foi excluída com sucesso!"
+                                            print('-' * len(frase3))
+                                            print(frase3)
+                                            print('-' * len(frase3))
+                                    del self.lista_clientes[opcao].contas[excluir_conta]
+                                    self.exibir_menu_contas(nome_pessoa)
+                                    break
+
                         elif escolha == 3:
                             self.menu_contas()
 

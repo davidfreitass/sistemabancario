@@ -11,7 +11,7 @@ class Menu:
     lista_bancos: list = []
     lista_pessoas: list = []
 
-    def menu(self):
+    def menu(self) -> None:
         print("""
             Bem vindo(a) ao sistema. Escolha a opção desejada: 
                 1 - Administrar o Sistema
@@ -29,7 +29,7 @@ class Menu:
             elif escolha == 3:
                 self.sair()
 
-    def menu_principal(self):
+    def menu_principal(self) -> None:
         print("""
             ADMINISTRAÇÃO DO SISTEMA
                 Escolha a opção desejada:
@@ -57,7 +57,7 @@ class Menu:
                 else:
                     print("Escolha inválida. Tente novamente!")
 
-    def exibir_menu_cliente(self, nome_pessoa):
+    def exibir_menu_cliente(self, nome_pessoa) -> None:
         print(f"""
                     ACESSO DO CLIENTE
                             Cliente selecionado: {nome_pessoa}
@@ -71,7 +71,7 @@ class Menu:
                                 6 - Voltar Menu Anterior
                             """)
 
-    def menu_cliente(self):
+    def menu_cliente(self) -> None:
         for i, cliente in enumerate(self.lista_clientes):
             print(f"[{i}] {cliente.pessoa.nome}")
         while True:
@@ -207,7 +207,7 @@ class Menu:
                         elif escolha == 6:
                             self.menu_cliente()
 
-    def menu_pessoa(self):
+    def menu_pessoa(self) -> None:
         print("""
             GERENCIAR PESSOAS
                 Escolha a opção desejada:
@@ -344,7 +344,7 @@ class Menu:
                 elif escolha == 6:
                     self.menu_principal()
 
-    def exibir_menu_contas(self, nome_pessoa):
+    def exibir_menu_contas(self, nome_pessoa) -> None:
         print(f"""
                             Cliente selecionado: {nome_pessoa}
 
@@ -354,7 +354,7 @@ class Menu:
                                 3 - Voltar Menu Anterior
                             """)
 
-    def menu_contas(self):
+    def menu_contas(self) -> None:
         for i, cliente in enumerate(self.lista_clientes):
             print(f"[{i}] {cliente.pessoa.nome}")
         while True:
@@ -409,6 +409,6 @@ class Menu:
                         elif escolha == 3:
                             self.menu_contas()
 
-    def sair(self):
+    def sair(self) -> None:
         print("Saindo do programa...")
         exit()

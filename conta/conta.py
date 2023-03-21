@@ -35,7 +35,7 @@ class Conta:
             print(frase2)
             print('='*len(frase2))
 
-    def extrato(self):
+    def extrato(self) -> None:
         print('=' * 60)
         print('|'.ljust(0), 'E X T R A T O   B A N C Á R I O'.center(57), '|'.rjust(0))
         print('=' * 60)

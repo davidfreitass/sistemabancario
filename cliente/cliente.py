@@ -13,7 +13,7 @@ class Cliente():
     def __init__(self, pessoa: Pessoa) -> None:
         self.pessoa = pessoa
 
-    def vincular_conta(self, nova_conta: Conta):
+    def vincular_conta(self, nova_conta: Conta) -> None:
         if len(self.contas) <= 0:
             self.contas = list()
         self.contas.append(nova_conta)

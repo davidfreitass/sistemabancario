@@ -14,12 +14,20 @@ class Conta:
         self.banco = banco
 
     def deposito(self, valor: float) -> None:
+        """
+        Método para realizar depósitos em contas bancárias.
+        """
+
         if len(self.transacoes) <= 0:
             self.transacoes = list()
         self.transacoes.append({"tipo": "credito", "valor": valor})
         self.saldo += valor
 
     def saque(self, valor: float) -> None:
+        """
+        Método para realizar saques em contas bancárias.
+        """
+
         if len(self.transacoes) <= 0:
             self.transacoes = list()
         self.transacoes.append({"tipo": "debito", "valor": valor})
@@ -36,6 +44,10 @@ class Conta:
             print('='*len(frase2))
 
     def extrato(self) -> None:
+        """
+        Método para exibir extrato de contas bancárias.
+        """
+
         print('=' * 60)
         print('|'.ljust(0), 'E X T R A T O   B A N C Á R I O'.center(57), '|'.rjust(0))
         print('=' * 60)

@@ -12,6 +12,10 @@ class Menu:
     lista_pessoas: list = []
 
     def menu(self) -> None:
+        """
+        Método para exibir o menu inicial do programa.
+        """
+
         print("""
             Bem vindo(a) ao sistema. Escolha a opção desejada: 
                 1 - Administrar o Sistema
@@ -30,6 +34,10 @@ class Menu:
                 self.sair()
 
     def menu_principal(self) -> None:
+        """
+        Método para exibir o menu de funcionalidades para administrar o sistema.
+        """
+
         print("""
             ADMINISTRAÇÃO DO SISTEMA
                 Escolha a opção desejada:
@@ -58,6 +66,10 @@ class Menu:
                     print("Escolha inválida. Tente novamente!")
 
     def exibir_menu_cliente(self, nome_pessoa) -> None:
+        """
+        Método para exibir o menu do cliente.
+        """
+
         print(f"""
                     ACESSO DO CLIENTE
                             Cliente selecionado: {nome_pessoa}
@@ -72,6 +84,10 @@ class Menu:
                             """)
 
     def menu_cliente(self) -> None:
+        """
+        Método para realizar as operações dos clientes.
+        """
+
         for i, cliente in enumerate(self.lista_clientes):
             print(f"[{i}] {cliente.pessoa.nome}")
         while True:
@@ -208,6 +224,10 @@ class Menu:
                             self.menu_cliente()
 
     def menu_pessoa(self) -> None:
+        """
+        Método para exibir o menu das pessoas e realizar suas opções.
+        """
+
         print("""
             GERENCIAR PESSOAS
                 Escolha a opção desejada:
@@ -345,6 +365,10 @@ class Menu:
                     self.menu_principal()
 
     def exibir_menu_contas(self, nome_pessoa) -> None:
+        """
+        Método para exibir o menu de contas.
+        """
+
         print(f"""
                             Cliente selecionado: {nome_pessoa}
 
@@ -355,6 +379,10 @@ class Menu:
                             """)
 
     def menu_contas(self) -> None:
+        """
+        Método para realizar os cadastros e exclusões de contas.
+        """
+
         for i, cliente in enumerate(self.lista_clientes):
             print(f"[{i}] {cliente.pessoa.nome}")
         while True:
@@ -410,5 +438,9 @@ class Menu:
                             self.menu_contas()
 
     def sair(self) -> None:
+        """
+        Método para finalizar o programa.
+        """
+
         print("Saindo do programa...")
         exit()

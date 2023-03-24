@@ -184,9 +184,9 @@ class Menu:
                                         else:
                                             for i, conta in enumerate(self.lista_clientes[opcao_transferencia].contas):
                                                 bancos4 = f"[{i}] {conta.banco}"
-                                                self.print_separador(bancos4)
+                                                self.print_separador(len(bancos4))
                                                 print(bancos4)
-                                                self.print_separador(bancos4)
+                                                self.print_separador(len(bancos4))
                                             while True:
                                                 conta_transferencia_2 = int(
                                                     input("Para qual conta? "))

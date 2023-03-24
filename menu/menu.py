@@ -95,7 +95,7 @@ class Menu:
                 input(f"Deseja selecionar qual cliente? [999 para voltar] "))
             if opcao == 999:
                 self.menu()
-            elif opcao not in range(0, len(self.lista_clientes)):
+            elif opcao > len(self.lista_clientes):
                 print("Escolha inválida. Tente novamente!")
             else:
                 nome_pessoa = self.lista_clientes[opcao].pessoa.nome
@@ -108,16 +108,16 @@ class Menu:
                         if escolha == 1:
                             for i, conta in enumerate(self.lista_clientes[opcao].contas):
                                 bancos1 = f"[{i}] {conta.banco}"
-                                print('='*len(bancos1))
+                                self.print_separador(len(bancos1))
                                 print(bancos1)
-                                print('='*len(bancos1))
+                                self.print_separador(len(bancos1))
                             self.exibir_menu_cliente(nome_pessoa)
                         elif escolha == 2:
                             for i, conta in enumerate(self.lista_clientes[opcao].contas):
                                 print(f"[{i}] {conta.banco}")
                             while True:
                                 conta_deposito = int(input("Em que conta? "))
-                                if conta_deposito not in range(0, len(self.lista_clientes[opcao].contas)):
+                                if conta_deposito > len(self.lista_clientes[opcao].contas):
                                     print("Escolha inválida. Tente novamente!")
                                 else:
                                     print(
@@ -133,13 +133,13 @@ class Menu:
                         elif escolha == 3:
                             for i, conta in enumerate(self.lista_clientes[opcao].contas):
                                 bancos2 = f"[{i}] {conta.banco}"
-                                print('='*len(bancos2))
+                                self.print_separador(len(bancos2))
                                 print(bancos2)
-                                print('='*len(bancos2))
+                                self.print_separador(len(bancos2))
                             while True:
                                 conta_saque = int(
                                     input("Deseja sacar em que conta? "))
-                                if conta_saque not in range(0, len(self.lista_clientes[opcao].contas)):
+                                if conta_saque > len(self.lista_clientes[opcao].contas):
                                     print("Escolha inválida. Tente novamente!")
                                 else:
                                     print(
@@ -155,13 +155,13 @@ class Menu:
                         elif escolha == 4:
                             for i, conta in enumerate(self.lista_clientes[opcao].contas):
                                 bancos3 = f"[{i}] {conta.banco}"
-                                print('='*len(bancos3))
+                                self.print_separador(len(bancos3))
                                 print(bancos3)
-                                print('='*len(bancos3))
+                                self.print_separador(len(bancos3))
                             while True:
                                 conta_transferencia_1 = int(
                                     input("De qual conta? "))
-                                if conta_transferencia_1 not in range(0, len(self.lista_clientes[opcao].contas)):
+                                if conta_transferencia_1 > len(self.lista_clientes[opcao].contas):
                                     print(
                                         "Escolha inválida. Tente novamente!")
                                 else:
@@ -170,27 +170,27 @@ class Menu:
                                             pass
                                         else:
                                             clientes = f"[{i}] {cliente.pessoa.nome}"
-                                            print('='*len(clientes))
+                                            self.print_separador(len(clientes))
                                             print(clientes)
-                                            print('='*len(clientes))
+                                            self.print_separador(len(clientes))
                                     while True:
                                         opcao_transferencia = int(
                                             input(f"Para qual cliente? [999 para voltar] "))
                                         if opcao_transferencia == 999:
                                             self.exibir_menu_cliente()
-                                        elif opcao_transferencia not in range(0, len(self.lista_clientes)):
+                                        elif opcao_transferencia > len(self.lista_clientes):
                                             print(
                                                 "Escolha inválida. Tente novamente!")
                                         else:
                                             for i, conta in enumerate(self.lista_clientes[opcao_transferencia].contas):
                                                 bancos4 = f"[{i}] {conta.banco}"
-                                                print('='*len(bancos4))
+                                                self.print_separador(bancos4)
                                                 print(bancos4)
-                                                print('='*len(bancos4))
+                                                self.print_separador(bancos4)
                                             while True:
                                                 conta_transferencia_2 = int(
                                                     input("Para qual conta? "))
-                                                if conta_transferencia_2 not in range(0, len(self.lista_clientes[opcao_transferencia].contas)):
+                                                if conta_transferencia_2 > len(self.lista_clientes[opcao_transferencia].contas):
                                                     print(
                                                         "Escolha inválida. Tente novamente!")
                                                 else:
@@ -213,7 +213,7 @@ class Menu:
                             while True:
                                 conta_extrato = int(
                                     input("Deseja receber o extrato de qual conta? "))
-                                if conta_extrato not in range(0, len(self.lista_clientes[opcao].contas)):
+                                if conta_extrato > len(self.lista_clientes[opcao].contas):
                                     print("Escolha inválida. Tente novamente!")
                                 else:
                                     self.lista_clientes[opcao].contas[conta_extrato].extrato(
@@ -261,15 +261,15 @@ class Menu:
                     self.menu_pessoa()
                 elif escolha == 2:
                     if len(self.lista_pessoas) >= 1:
-                        print("-" * 30)
+                        self.print_separador()
                         for i, pessoa in enumerate(self.lista_pessoas):
                             print(f"[{i}] {pessoa.nome}")
-                        print("-" * 30)
+                        self.print_separador()
                         self.menu_pessoa()
                     else:
-                        print("-" * 30)
+                        self.print_separador()
                         print("Não há pessoas cadastradas.")
-                        print("-" * 30)
+                        self.print_separador()
                         self.menu_pessoa()
 
                 elif escolha == 3:
@@ -278,25 +278,25 @@ class Menu:
                     for i, pessoa in enumerate(self.lista_pessoas):
                         if pes_pessoa == pessoa.nome:
                             frase1 = f"A pessoa {pes_pessoa} se encontra na lista de pessoas do sistema."
-                            print('-' * len(frase1))
+                            self.print_separador(len(frase1))
                             print(frase1)
-                            print('-' * len(frase1))
+                            self.print_separador(len(frase1))
                             self.menu_pessoa()
                         elif i == (len(self.lista_pessoas) - 1):
                             if (pes_pessoa == pessoa.nome) == False:
                                 frase2 = f"A pessoa {pes_pessoa} NÃO se encontra na lista de pessoas do sistema."
-                                print('-' * len(frase2))
+                                self.print_separador(len(frase2))
                                 print(frase2)
-                                print('-' * len(frase2))
+                                self.print_separador(len(frase2))
                                 self.menu_pessoa()
                         else:
                             continue
                 elif escolha == 4:
                     if len(self.lista_pessoas) >= 1:
-                        print("-" * 30)
+                        self.print_separador()
                         for i, p in enumerate(self.lista_pessoas):
                             print(f"[{i}]: {p.nome}")
-                        print("-" * 30)
+                        self.print_separador()
                         while True:
                             excluir_pessoa = int(
                                 input("Deseja excluir qual pessoa? [999 para voltar] "))
@@ -312,27 +312,27 @@ class Menu:
                                 del self.lista_clientes[excluir_pessoa]
                                 print("Nova lista de pessoas: ")
                                 if len(self.lista_pessoas) >= 1:
-                                    print("-" * 30)
+                                    self.print_separador()
                                     for i, p in enumerate(self.lista_pessoas):
                                         print(f"[{i}]: {p.nome}")
-                                    print("-" * 30)
+                                    self.print_separador()
                                 else:
-                                    print("-" * 30)
+                                    self.print_separador()
                                     print("Não há pessoas cadastradas.")
-                                    print("-" * 30)
+                                    self.print_separador()
                                 self.menu_pessoa()
                     else:
-                        print("-" * 30)
+                        self.print_separador()
                         print("Não há pessoas cadastradas.")
-                        print("-" * 30)
+                        self.print_separador()
                         self.menu_pessoa()
 
                 elif escolha == 5:
                     if len(self.lista_pessoas) >= 1:
-                        print("-" * 30)
+                        self.print_separador()
                         for i, p in enumerate(self.lista_pessoas):
                             print(f"[{i}]: {p.nome}")
-                        print("-" * 30)
+                        self.print_separador()
                         while True:
                             atualizar_pessoa = int(
                                 input("Deseja atualizar qual pessoa? [999 para voltar] "))
@@ -351,15 +351,15 @@ class Menu:
                                 print("-" * len(frase_atualizada))
                                 print(frase_atualizada)
                                 print("Nova lista de pessoas: ")
-                                print("-" * 30)
+                                self.print_separador()
                                 for i, p in enumerate(self.lista_pessoas):
                                     print(f"[{i}]: {p.nome}")
-                                print("-" * 30)
+                                self.print_separador()
                                 self.menu_pessoa()
                     else:
-                        print("-" * 30)
+                        self.print_separador()
                         print("Não há pessoas cadastradas.")
-                        print("-" * 30)
+                        self.print_separador()
                         self.menu_pessoa()
                 elif escolha == 6:
                     self.menu_principal()
@@ -406,15 +406,15 @@ class Menu:
                             self.lista_clientes[opcao].vincular_conta(
                                 nova_conta)
                             frase = f"Foi adicionado uma conta no banco {banco} a pessoa {nome_pessoa}."
-                            print('=' * len(frase))
+                            self.print_separador(len(frase))
                             print(frase)
-                            print('=' * len(frase))
+                            self.print_separador(len(frase))
                             self.exibir_menu_contas(nome_pessoa)
                         elif escolha == 2:
-                            print('-' * 30)
+                            self.print_separador()
                             for i, conta in enumerate(self.lista_clientes[opcao].contas):
                                 print(f"[{i}] {conta.banco}")
-                            print('-' * 30)
+                            self.print_separador()
                             while True:
                                 excluir_conta = int(
                                     input("Deseja excluir qual conta? [999 para voltar] "))
@@ -427,9 +427,9 @@ class Menu:
                                     for i, conta in enumerate(self.lista_clientes[opcao].contas):
                                         if excluir_conta == i:
                                             frase3 = f"A conta {conta.banco} foi excluída com sucesso!"
-                                            print('-' * len(frase3))
+                                            self.print_separador(len(frase3))
                                             print(frase3)
-                                            print('-' * len(frase3))
+                                            self.print_separador(len(frase3))
                                     del self.lista_clientes[opcao].contas[excluir_conta]
                                     self.exibir_menu_contas(nome_pessoa)
                                     break
@@ -444,3 +444,10 @@ class Menu:
 
         print("Saindo do programa...")
         exit()
+
+    def print_separador(self, tamanho: int = 30) -> None:
+        """
+        Separador de informações no terminal.
+        """
+
+        print("=" * tamanho)

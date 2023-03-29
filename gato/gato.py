@@ -3,7 +3,7 @@ from animal.animal import Animal
 
 class Gato(Animal):
     """
-    Características de um gato.
+    Características e funções de um gato.
     """
 
     raça: str

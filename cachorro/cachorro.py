@@ -3,7 +3,7 @@ from animal.animal import Animal
 
 class Cachorro(Animal):
     """
-    Características de um cachorro.
+    Características e funções de um cachorro.
     """
 
     peso: float

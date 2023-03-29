@@ -1,6 +1,6 @@
 class Animal:
     """
-    Características de um animal.
+    Características e funções de um animal.
     """
 
     nome: str
